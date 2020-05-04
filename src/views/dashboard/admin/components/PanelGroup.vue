@@ -7,9 +7,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Visits
+            用户总数
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="data.user" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -20,35 +20,35 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Messages
+            话题总数
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="data.topical" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+          <i class="el-icon-s-opportunity card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Purchases
+            经验总数
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="data.share" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+          <i class="el-icon-postcard card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Shoppings
+            打卡总数
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="data.card" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -62,9 +62,26 @@ export default {
   components: {
     CountTo
   },
+  data() {
+    const data = {
+      user: 0,
+      topical: 0,
+      share: 0,
+      card: 0
+    }
+    // 获取数据
+    this.tools.requests(this.G.SERVER + '/api/admin/visualization/overall', {}, 'get').then((response) => {
+      if (response != null && response.code === 1) {
+        this.data = response.data
+      }
+    })
+    return {
+      data
+    }
+  },
   methods: {
     handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
+      // this.$emit('handleSetLineChartData', type)
     }
   }
 }

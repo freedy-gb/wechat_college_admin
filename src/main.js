@@ -20,6 +20,10 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+// 引入全局函数
+import global from '@/utils/global'
+Vue.use(global)
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

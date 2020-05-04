@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-
+    <el-form ref="loginForm" :model="loginForm" class="login-form" autocomplete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">
           {{ $t('login.title') }}
@@ -55,34 +54,14 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-
 export default {
   name: 'Login',
 
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: '',
         password: ''
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
       capsTooltip: false,
@@ -133,21 +112,32 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
+      const data = {
+        user: this.loginForm.username,
+        password: this.loginForm.password
+      }
+      if (this.loginForm.username === '') {
+        this.$message.error('用户名不能为空')
+        return
+      } else if (this.loginForm.password === '') {
+        this.$message.error('密码不能为空')
+        return
+      }
+      this.loading = true
+      // 登录接口
+      this.tools.requests(this.G.SERVER + '/api/admin/token', data, 'post').then((response) => {
+        if (response.code === 1) {
+          this.$message.success('登录成功!')
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })
-            .catch(() => {
-              this.loading = false
-            })
         } else {
-          console.log('error submit!!')
-          return false
+          this.$message.error('用户名或密码错误!')
         }
+      }).finally(() => {
+        this.loading = false
       })
     },
     getOtherQuery(query) {
