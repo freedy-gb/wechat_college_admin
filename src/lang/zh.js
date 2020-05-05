@@ -2,6 +2,13 @@ export default {
   route: {
     dashboard: '首页',
     documentation: '文档',
+    plateManage: '板块管理',
+    userManage: '用户管理',
+    topicalManage: '话题管理',
+    shareManage: '经验管理',
+    cardManage: '打卡管理',
+    messageManage: '消息管理',
+    commentManage: '评论管理',
     guide: '引导页',
     permission: '权限测试页',
     rolePermission: '角色权限',

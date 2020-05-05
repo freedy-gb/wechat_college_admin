@@ -22,7 +22,7 @@ export default {
     }
     // 全局变量
     Vue.prototype.G = {
-      SERVER: 'http://127.0.0.1:2333'
+      SERVER: 'https://college.xiaoyou66.com'
     }
   }
 }
