@@ -6,7 +6,6 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -172,18 +171,18 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/message',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/card/index'),
-        name: 'card',
-        meta: { title: 'messageManage', icon: 'email', noCache: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/message',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/card/index'),
+  //       name: 'card',
+  //       meta: { title: 'messageManage', icon: 'email', noCache: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/comment',
     component: Layout,

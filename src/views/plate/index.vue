@@ -53,7 +53,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="row.status==='0'" type="success" size="mini" @click="changePlateStatus(1,row.id)">
+          <el-button v-if="row.status==='0'" type="success" size="mini" @click="changePlateStatus(1,row.id,row.userId)">
             通过
           </el-button>
           <el-button v-else type="info" size="mini" @click="changePlateStatus(0,row.id)">
@@ -196,8 +196,8 @@ export default {
       })
     },
     // 通过拒绝板块
-    changePlateStatus(status, id) {
-      this.tools.requests(this.G.SERVER + '/api/admin/plate/change/plateStatus', { status: status, plateID: id }, 'post').then((response) => {
+    changePlateStatus(status, id, userID) {
+      this.tools.requests(this.G.SERVER + '/api/admin/plate/change/plateStatus', { status: status, plateID: id, userID }, 'post').then((response) => {
         if (response != null && response.code === 1) {
           this.$message.success('修改状态成功')
           this.getList()

@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: 'B吧后台管理系统',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '知享园后台管理系统',
+      logo: 'https://img.xiaoyou66.com/images/2020/04/27/Y2ee.png'
     }
   }
 }
@@ -59,6 +59,7 @@ export default {
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
+      border-radius: 50%;
     }
 
     & .sidebar-title {
@@ -76,6 +77,7 @@ export default {
   &.collapse {
     .sidebar-logo {
       margin-right: 0px;
+      border-radius: 50%;
     }
   }
 }

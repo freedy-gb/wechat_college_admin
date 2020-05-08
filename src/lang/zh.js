@@ -80,7 +80,7 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: 'B吧后台管理系统',
+    title: '知享园后台管理系统',
     logIn: '登录',
     username: '账号',
     password: '密码',
